@@ -26,7 +26,7 @@ function Form({ setAuth }) {
   const btnText = isRegistration ? "Зарегистрироваться" : "Войти";
 
   return (
-    <div>
+    <div className="container">
       {
         <ButtonToggle
           isRegistration={isRegistration}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import $api from "../http/axiosConfig";
+import "../style/mainPage.css";
 
 function MainPage({ userData }) {
   const [topics, setTopics] = useState(null);
@@ -24,15 +25,14 @@ function MainPage({ userData }) {
     fetchingThemes();
   }, []);
 
-  console.log(topics);
-
   if (!isLoading) {
     return <div>Загрузка...</div>;
   }
 
   return (
     <div>
-      <Link to={`/point/${userData.id}`}>Посмотреть былые провалы</Link>
+      <h1>Flashcards</h1>
+      <Link to={`/point/${userData?.id}`}>Посмотреть былые провалы</Link>
       {topics.map((el, index) => {
         return (
           <div key={index}>

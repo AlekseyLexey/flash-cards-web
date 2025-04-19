@@ -1,0 +1,29 @@
+body {
+  background: linear-gradient(to bottom, #2e2154 0%, #3a2c72 50%, #4b3a90 100%);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 25px;
+  font-size: 16px;
+}
+
+.topics {
+  background-color: #5238bb;
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 999px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.topics:hover {
+  /* background-color: #5c3fff;  */
+  background-color: #574aa6;
+}

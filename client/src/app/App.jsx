@@ -27,7 +27,7 @@ function App() {
     };
 
     fetchUserData();
-  }, []);
+  }, [isAuth]);
 
   if (isLoading) {
     return <>Загрузка...</>;

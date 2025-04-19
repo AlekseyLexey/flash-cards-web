@@ -37,8 +37,6 @@ function QuestionPage({ user_id }) {
     fetchingQuestions();
   }, []);
 
-  console.log(questions);
-
   useEffect(() => {
     async function fetchingPoints() {
       try {
@@ -95,7 +93,9 @@ function QuestionPage({ user_id }) {
     <div>
       {content}
       <div>
-        <button onClick={() => navigate("/quiz")}>Main page</button>
+        <button className="buttons" onClick={() => navigate("/quiz")}>
+          Main page
+        </button>
       </div>
     </div>
   );
