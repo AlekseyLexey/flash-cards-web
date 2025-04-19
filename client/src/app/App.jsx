@@ -29,6 +29,10 @@ function App() {
     fetchUserData();
   }, []);
 
+  if (isLoading) {
+    return <>Загрузка...</>;
+  }
+
   return (
     <Routes>
       {isAuth ? (

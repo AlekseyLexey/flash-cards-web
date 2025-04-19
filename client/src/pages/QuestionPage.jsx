@@ -37,6 +37,8 @@ function QuestionPage({ user_id }) {
     fetchingQuestions();
   }, []);
 
+  console.log(questions);
+
   useEffect(() => {
     async function fetchingPoints() {
       try {

@@ -12,6 +12,7 @@ function MainPage({ userData }) {
 
       try {
         const { data } = await $api.get("themes");
+
         setTopics(data);
       } catch (error) {
         console.log(error);
@@ -22,6 +23,8 @@ function MainPage({ userData }) {
 
     fetchingThemes();
   }, []);
+
+  console.log(topics);
 
   if (!isLoading) {
     return <div>Загрузка...</div>;
