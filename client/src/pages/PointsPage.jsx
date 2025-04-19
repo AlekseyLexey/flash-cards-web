@@ -29,7 +29,7 @@ function PointPage(){
             <ul>
                 {points.map((point, index) => (
                     <li key={index}>
-                        <p>`$`</p>
+                        <p>`${point}`</p>
                     </li>
                 ))}
             </ul>
