@@ -1,54 +1,81 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import quizQuestions from './quizQuestions';
-import $api from '../http/axiosConfig';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import $api from "../http/axiosConfig";
 
-function QuestionPage({ theme }) {
+const POINT = 5;
+
+function QuestionPage({ user_id }) {
   const [questions, setQuestions] = useState(null);
   const [themeInfo, setThemeInfo] = useState(null);
-  const [answer, setAnswer] = useState('');
-  // console.log(data)
+  const [answer, setAnswer] = useState("");
+  const [questionCounter, setQuestionCounter] = useState(0);
+  const [result, setResult] = useState({
+    user_id,
+    total_points: 0,
+    first_time: 0,
+    theme_id: null,
+  });
+  const [isDone, setDone] = useState(false);
+  const [hasPostedPoints, setHasPostedPoints] = useState(false);
+
   const { id } = useParams();
   const navigate = useNavigate();
-  useEffect(()=>{
-   async function fetchingQuestions() {
-    try{
-      const {data} = await $api.get(`/themes/${id}`)
-      setThemeInfo({theme_id: data.id, name: data.theme })
-      setQuestions(data.theme_question)
 
+  useEffect(() => {
+    async function fetchingQuestions() {
+      try {
+        const { data } = await $api.get(`/themes/${id}`);
+        setResult((prev) => {
+          return { ...prev, theme_id: data.id };
+        });
+        setThemeInfo({ name: data.theme });
+        setQuestions(data.theme_question);
+      } catch (error) {
+        console.log(error);
+      }
     }
-    catch(error){
-      console.log(error)
+    fetchingQuestions();
+  }, []);
+
+  useEffect(() => {
+    async function fetchingPoints() {
+      try {
+        if (isDone && !hasPostedPoints) {
+          await $api.post(`/point`, result);
+          setHasPostedPoints(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
-   }
-   fetchingQuestions()
-  }, [])
+    fetchingPoints();
+  }, [isDone]);
 
-  console.log(questions)
-  console.log(themeInfo)
+  const handleCheckAnswer = () => {
+    const currentQuestion = questions[questionCounter].answer;
 
-
-  const handleClear = () => {
+    if (currentQuestion.toLowerCase() == answer.toLowerCase()) {
+      setResult((prev) => {
+        return { ...prev, total_points: prev.total_points + POINT };
+      });
+    }
+    setQuestionCounter((prevCounter) => prevCounter + 1);
     setAnswer("");
+    if (questionCounter + 1 === questions.length) {
+      setDone(true);
+    }
   };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      setAnswer(""); 
+      handleCheckAnswer();
     }
-  }
+  };
 
-  const question = quizQuestions.find((el) => el.id === +id);
-
-  if (!question) {
-    return <div>404</div>;
-  }
-
-  return (
-    <div>
-      <h2>Тема: {theme}</h2>
-      <div>{question.question}</div>
+  const content = !isDone ? (
+    <>
+      <h2>Тема: {themeInfo?.name}</h2>
+      <div>{questions ? questions[questionCounter].question : "Загрузка"}</div>
       <input
         type="text"
         className="input"
@@ -56,9 +83,17 @@ function QuestionPage({ theme }) {
         onChange={(e) => setAnswer(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <button onClick={handleClear}>Send</button>
+      <button onClick={handleCheckAnswer}>Send</button>
+    </>
+  ) : (
+    <>Вы прошли QUIZ ваш счет: ${result.total_points}</>
+  );
+
+  return (
+    <div>
+      {content}
       <div>
-          <button onClick={() => navigate(-1)}>Main page</button>
+        <button onClick={() => navigate("/quiz")}>Main page</button>
       </div>
     </div>
   );
