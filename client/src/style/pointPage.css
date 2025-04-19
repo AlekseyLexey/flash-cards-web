@@ -1,0 +1,40 @@
+.titleThemeOfPoints {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+.points {
+    text-align: center;
+    margin: 5px 0;
+}
+
+.buttonPoint {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: rgb(51, 153, 127);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.liPoint {
+    width: 250px;
+    border: 2px solid rgb(51, 153, 127);
+    border-radius: 15px;
+    margin: 20px;
+    padding: 15px;
+    list-style-type: none;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    padding: 0;
+    margin: 0 auto;
+}
