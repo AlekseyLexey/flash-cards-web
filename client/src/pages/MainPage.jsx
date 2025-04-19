@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import quizTopics from './quizTopics';
 
 function MainPage() {
@@ -9,7 +10,9 @@ function MainPage() {
       {topics.map((el, index) => {
         return (
           <div key={index}>
-            <div>{el.topic}</div>
+            <Link to={`/quiz/${el.id}`}>
+              <div>{el.topic}</div>
+            </Link>
           </div>
         );
       })}
