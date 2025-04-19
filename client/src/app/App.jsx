@@ -5,6 +5,7 @@ import Form from "../components/Form/From";
 import MainPage from "../pages/MainPage";
 import { Route, Routes, Navigate } from "react-router-dom";
 import QuestionPage from "../pages/QuestionPage";
+import PointPage from "../pages/PointsPage";
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -34,11 +35,15 @@ function App() {
         <>
           <Route
             path="/quiz"
-            element={isAuth ? <MainPage /> : <Navigate to="/auth" />}
+            element={isAuth ? <MainPage userData={userData}/> : <Navigate to="/auth" />}
           />
           <Route
             path="/quiz/:id"
             element={isAuth ? <QuestionPage /> : <Navigate to="/auth" />}
+          />
+          <Route
+            path="/point/:id"
+            element={isAuth ? <PointPage /> : <Navigate to="/auth" />}
           />
         </>
       ) : (
