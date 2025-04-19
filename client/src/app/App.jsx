@@ -1,7 +1,9 @@
-import { useState } from "react";
+import MainPage from "../pages/MainPage";
 
 function App() {
-  return <>ПРИЛОЖЕНИЕ</>;
+  return <>
+  <MainPage />
+  </>;
 }
 
 export default App;
