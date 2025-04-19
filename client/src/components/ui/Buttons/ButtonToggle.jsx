@@ -5,7 +5,7 @@ const ButtonToggle = React.memo(({ isRegistration, setRegistration }) => {
     <div>
       {isRegistration ? (
         <>
-          "У меня есть акаунт"
+          
           <button onClick={() => setRegistration(false)}>Войти</button>
         </>
       ) : (

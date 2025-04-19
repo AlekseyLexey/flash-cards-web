@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import quizQuestions from './quizQuestions';
 import $api from '../http/axiosConfig';
+import '../style/questionPage.css'
 
 function QuestionPage({ theme }) {
   const [questions, setQuestions] = useState(null);
@@ -46,7 +47,7 @@ function QuestionPage({ theme }) {
   }
 
   return (
-    <div>
+    <div className='container'>
       <h2>Тема: {theme}</h2>
       <div>{question.question}</div>
       <input
@@ -56,9 +57,9 @@ function QuestionPage({ theme }) {
         onChange={(e) => setAnswer(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <button onClick={handleClear}>Send</button>
+      <button className='buttons' onClick={handleClear}>Send</button>
       <div>
-          <button onClick={() => navigate(-1)}>Main page</button>
+          <button className='buttons' onClick={() => navigate(-1)}>Main page</button>
       </div>
     </div>
   );

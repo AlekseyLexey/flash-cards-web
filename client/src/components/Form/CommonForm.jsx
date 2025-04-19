@@ -20,7 +20,7 @@ function CommonForm({ initialFormData, onSubmit, buttonText }) {
   };
 
   return (
-    <div>
+    <div >
       <form className="form" onSubmit={handleSubmit}>
         <label>
           Name
