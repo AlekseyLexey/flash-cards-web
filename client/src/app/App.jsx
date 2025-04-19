@@ -35,11 +35,23 @@ function App() {
         <>
           <Route
             path="/quiz"
-            element={isAuth ? <MainPage userData={userData}/> : <Navigate to="/auth" />}
+            element={
+              isAuth ? (
+                <MainPage userData={userData} />
+              ) : (
+                <Navigate to="/auth" />
+              )
+            }
           />
           <Route
             path="/quiz/:id"
-            element={isAuth ? <QuestionPage /> : <Navigate to="/auth" />}
+            element={
+              isAuth ? (
+                <QuestionPage user_id={userData?.id} />
+              ) : (
+                <Navigate to="/auth" />
+              )
+            }
           />
           <Route
             path="/point/:id"
