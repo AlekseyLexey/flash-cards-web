@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const pointRouter = require('./api/pointRoutes')
+const themeRouter = require('./api/themeRoutes')
 const {
   registration,
   login,
@@ -13,6 +15,8 @@ router.post("/login", login);
 router.post("/logout", logout);
 router.get("/refresh", refresh);
 
-// router.use('/themes', )
+
+router.use('/themes', themeRouter)
+router.use('/point', pointRouter)
 
 module.exports = router;
