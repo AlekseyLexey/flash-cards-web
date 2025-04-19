@@ -1,33 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import quizQuestions from './quizQuestions';
-import $api from '../http/axiosConfig';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import quizQuestions from "./quizQuestions";
+import $api from "../http/axiosConfig";
 
-function QuestionPage({ theme }) {
+function QuestionPage() {
   const [questions, setQuestions] = useState(null);
   const [themeInfo, setThemeInfo] = useState(null);
-  const [answer, setAnswer] = useState('');
-  // console.log(data)
+  const [answer, setAnswer] = useState("");
+
   const { id } = useParams();
   const navigate = useNavigate();
-  useEffect(()=>{
-   async function fetchingQuestions() {
-    try{
-      const {data} = await $api.get(`/themes/${id}`)
-      setThemeInfo({theme_id: data.id, name: data.theme })
-      setQuestions(data.theme_question)
 
+  useEffect(() => {
+    async function fetchingQuestions() {
+      try {
+        const { data } = await $api.get(`/themes/${id}`);
+        setThemeInfo({ theme_id: data.id, name: data.theme });
+        setQuestions(data.theme_question);
+      } catch (error) {
+        console.log(error);
+      }
     }
-    catch(error){
-      console.log(error)
-    }
-   }
-   fetchingQuestions()
-  }, [])
+    fetchingQuestions();
+  }, []);
 
-  console.log(questions)
-  console.log(themeInfo)
-
+  console.log(questions);
+  console.log(themeInfo);
 
   const handleClear = () => {
     setAnswer("");
@@ -35,19 +33,15 @@ function QuestionPage({ theme }) {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      setAnswer(""); 
+      setAnswer("");
     }
-  }
+  };
 
   const question = quizQuestions.find((el) => el.id === +id);
 
-  if (!question) {
-    return <div>404</div>;
-  }
-
   return (
     <div>
-      <h2>Тема: {theme}</h2>
+      <h2>Тема: {themeInfo?.name}</h2>
       <div>{question.question}</div>
       <input
         type="text"
@@ -58,7 +52,7 @@ function QuestionPage({ theme }) {
       />
       <button onClick={handleClear}>Send</button>
       <div>
-          <button onClick={() => navigate(-1)}>Main page</button>
+        <button onClick={() => navigate(-1)}>Main page</button>
       </div>
     </div>
   );
