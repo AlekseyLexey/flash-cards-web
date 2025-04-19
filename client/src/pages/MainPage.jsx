@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import $api from "../http/axiosConfig";
 
-function MainPage() {
+function MainPage({ userData }) {
   const [topics, setTopics] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
@@ -29,6 +29,7 @@ function MainPage() {
 
   return (
     <div>
+      <Link to={`/point/${userData.id}`}>Посмотреть былые провалы</Link>
       {topics.map((el, index) => {
         return (
           <div key={index}>
