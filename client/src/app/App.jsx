@@ -3,8 +3,9 @@ import authReq from "../services/apiAuth";
 
 import Form from "../components/Form/From";
 import MainPage from '../pages/MainPage';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import QuestionPage from '../pages/QuestionPage';
+
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -29,6 +30,8 @@ function App() {
   }, []);
 
   return (  <Routes>
+    <Route path="/" element={<Navigate to={!isAuth ? "/auth" : "/quiz"} />} />
+     <Route path="/auth" element={<Form setAuth={setAuth} /> } />
     <Route path="/quiz" element={<MainPage />} />
     <Route path="/quiz/:id" element={<QuestionPage />} />
   </Routes>)
