@@ -17,7 +17,6 @@ function QuestionPage({ user_id }) {
     theme_id: null,
   });
   const [isDone, setDone] = useState(false);
-  const [hasPostedPoints, setHasPostedPoints] = useState(false);
 
   const { id } = useParams();
 
@@ -40,9 +39,8 @@ function QuestionPage({ user_id }) {
   useEffect(() => {
     async function fetchingPoints() {
       try {
-        if (isDone && !hasPostedPoints) {
+        if (isDone) {
           await $api.post(`/point`, result);
-          setHasPostedPoints(true);
         }
       } catch (error) {
         console.log(error);
@@ -56,7 +54,11 @@ function QuestionPage({ user_id }) {
 
     if (currentQuestion.toLowerCase() == answer.toLowerCase()) {
       setResult((prev) => {
-        return { ...prev, total_points: prev.total_points + POINT };
+        return {
+          ...prev,
+          total_points: prev.total_points + POINT,
+          first_time: prev.first_time + 1,
+        };
       });
     }
     setQuestionCounter((prevCounter) => prevCounter + 1);
@@ -86,7 +88,7 @@ function QuestionPage({ user_id }) {
       <button onClick={handleCheckAnswer}>Send</button>
     </>
   ) : (
-    <>Вы прошли QUIZ ваш счет: ${result.total_points}</>
+    <>Вы прошли QUIZ ваш счет: {result.total_points} очков</>
   );
 
   return (

@@ -32,9 +32,7 @@ function PointPage() {
           <li className="liPoint" key={index}>
             <p className="titleThemeOfPoints">{point.theme_point.theme}</p>
             <p className="points">Всего набрано очков : {point.total_points}</p>
-            <p className="points">
-              Отгадано с первого раза : {point.first_time}
-            </p>
+            <p className="points">Правильных ответов : {point.first_time}</p>
           </li>
         ))}
       </ul>
