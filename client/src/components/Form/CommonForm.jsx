@@ -23,13 +23,13 @@ function CommonForm({ initialFormData, onSubmit, buttonText }) {
     <div>
       <form className="form" onSubmit={handleSubmit}>
         <label>
-          Login
+          Name
           <input
             value={formData.login}
             onChange={handleChange}
             type="text"
-            name="login"
-            placeholder="Login"
+            name="name"
+            placeholder="name"
           />
         </label>
         <label>

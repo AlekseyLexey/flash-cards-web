@@ -1,21 +1,32 @@
-<<<<<<< HEAD
-import { useState } from "react";
-import Form from "../components/Form/From";
+import { useState, useEffect } from "react";
+import authReq from "../services/apiAuth";
 
-function App() {
-  return (
-    <>
-      <Form />
-    </>
-  );
-=======
+import Form from "../components/Form/From";
 import MainPage from "../pages/MainPage";
 
 function App() {
-  return <>
-  <MainPage />
-  </>;
->>>>>>> 8eaec889ba6dfe0e77925ceaf448120a92b048c4
+  const [userData, setUserData] = useState(null);
+  const [isAuth, setAuth] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      setLoading(true);
+      try {
+        const data = await authReq();
+        setAuth(true);
+        setUserData(data.user);
+      } catch {
+        setAuth(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  return <>{!isAuth ? <Form setAuth={setAuth} /> : <MainPage />}</>;
 }
 
 export default App;

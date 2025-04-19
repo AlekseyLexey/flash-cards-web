@@ -6,7 +6,7 @@ import ButtonToggle from "../ui/Buttons/ButtonToggle";
 import CommonForm from "./CommonForm";
 
 const initialFormData = {
-  login: "",
+  name: "",
   email: "",
   password: "",
 };
@@ -22,6 +22,9 @@ function Form({ setAuth }) {
     setAuth(true);
   };
 
+  const titleText = isRegistration ? "(Регистрация)" : "(Вход в систему)";
+  const btnText = isRegistration ? "Зарегистрироваться" : "Войти";
+
   return (
     <div>
       {
@@ -30,11 +33,11 @@ function Form({ setAuth }) {
           setRegistration={setRegistration}
         />
       }
-      <div>{isRegistration ? "(Регистрация)" : "(Вход в систему)"}</div>
+      <div>{titleText}</div>
       <CommonForm
         initialFormData={initialFormData}
         onSubmit={handleSubmit}
-        buttonText={"Отправить"}
+        buttonText={btnText}
       />
     </div>
   );
