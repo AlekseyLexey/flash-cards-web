@@ -7,6 +7,7 @@ function MainPage() {
   const [topics, setTopics] = useState(quizTopics);
   return (
     <div>
+      <h2>Choose Topic:</h2>
       {topics.map((el, index) => {
         return (
           <div key={index}>
