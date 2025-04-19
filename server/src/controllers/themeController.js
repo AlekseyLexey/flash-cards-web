@@ -6,7 +6,7 @@ async function getThemes(req, res, next) {
 
     res.status(200).json(themes);
   } catch (error) {
-    next(e);
+    next(error);
   }
 }
 
@@ -18,7 +18,7 @@ async function getThemeQuestions(req, res, next) {
 
     res.status(200).json(questions);
   } catch (error) {
-    next(e);
+    next(error);
   }
 }
 
