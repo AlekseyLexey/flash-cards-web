@@ -1,14 +1,9 @@
 const router = require("express").Router();
-// const {
-//   registration,
-//   login,
-//   logout,
-//   refresh,
-// } = require("../controllers/userController");
+const {getThemes,getThemeQuestions} = require("../../controllers/themeController")
 
-const authMiddleware = require("../middlewares/authMiddleware");
+const authMiddleware = require("../../middlewares/authMiddleware");
 
-// router.get('/', authMiddleware, logout)
-// router.get("/:id", authMiddleware, refresh);
+router.get('/', authMiddleware, getThemes)
+router.get("/:id", authMiddleware, getThemeQuestions);
 
 module.exports = router;
