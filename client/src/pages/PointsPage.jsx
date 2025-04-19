@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import $api from "../http/axiosConfig";
 import "../style/pointPage.css";
+import ButtonToMain from "../components/ui/Buttons/ButtonToMain";
 
 function PointPage() {
   const [points, setPoints] = useState([]);
   const { id } = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPoints = async () => {
@@ -25,9 +25,7 @@ function PointPage() {
 
   return (
     <div className="pointsDiv">
-      <button className="battonPoint" onClick={() => navigate("/quiz")}>
-        На главную
-      </button>
+      <ButtonToMain />
       <h2>Очки пользователя</h2>
       <ul>
         {points.map((point, index) => (

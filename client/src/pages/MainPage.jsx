@@ -32,7 +32,9 @@ function MainPage({ userData }) {
   return (
     <div>
       <h1>Flashcards</h1>
-      <Link to={`/point/${userData?.id}`}>Посмотреть былые провалы</Link>
+      <Link className="liPoint" to={`/point/${userData?.id}`}>
+        Посмотреть былые провалы
+      </Link>
       {topics.map((el, index) => {
         return (
           <div key={index}>

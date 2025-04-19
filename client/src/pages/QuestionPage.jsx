@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import $api from "../http/axiosConfig";
+import ButtonToMain from "../components/ui/Buttons/ButtonToMain";
 
 const POINT = 5;
 
@@ -19,7 +20,6 @@ function QuestionPage({ user_id }) {
   const [hasPostedPoints, setHasPostedPoints] = useState(false);
 
   const { id } = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchingQuestions() {
@@ -93,9 +93,7 @@ function QuestionPage({ user_id }) {
     <div>
       {content}
       <div>
-        <button className="buttons" onClick={() => navigate("/quiz")}>
-          Main page
-        </button>
+        <ButtonToMain />
       </div>
     </div>
   );

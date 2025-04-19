@@ -6,6 +6,7 @@ import MainPage from "../pages/MainPage";
 import { Route, Routes, Navigate } from "react-router-dom";
 import QuestionPage from "../pages/QuestionPage";
 import PointPage from "../pages/PointsPage";
+import ButtonLogout from "../components/ui/Buttons/ButtonLogout";
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -34,39 +35,45 @@ function App() {
   }
 
   return (
-    <Routes>
-      {isAuth ? (
-        <>
-          <Route
-            path="/quiz"
-            element={
-              isAuth ? (
-                <MainPage userData={userData} />
-              ) : (
-                <Navigate to="/auth" />
-              )
-            }
-          />
-          <Route
-            path="/quiz/:id"
-            element={
-              isAuth ? (
-                <QuestionPage user_id={userData?.id} />
-              ) : (
-                <Navigate to="/auth" />
-              )
-            }
-          />
-          <Route
-            path="/point/:id"
-            element={isAuth ? <PointPage /> : <Navigate to="/auth" />}
-          />
-        </>
-      ) : (
-        <Route path="/auth" element={<Form setAuth={setAuth} />} />
-      )}
-      <Route path="*" element={<Navigate to={isAuth ? "/quiz" : "/auth"} />} />
-    </Routes>
+    <>
+      {isAuth && <ButtonLogout setAuth={setAuth} />}
+      <Routes>
+        {isAuth ? (
+          <>
+            <Route
+              path="/quiz"
+              element={
+                isAuth ? (
+                  <MainPage userData={userData} />
+                ) : (
+                  <Navigate to="/auth" />
+                )
+              }
+            />
+            <Route
+              path="/quiz/:id"
+              element={
+                isAuth ? (
+                  <QuestionPage user_id={userData?.id} />
+                ) : (
+                  <Navigate to="/auth" />
+                )
+              }
+            />
+            <Route
+              path="/point/:id"
+              element={isAuth ? <PointPage /> : <Navigate to="/auth" />}
+            />
+          </>
+        ) : (
+          <Route path="/auth" element={<Form setAuth={setAuth} />} />
+        )}
+        <Route
+          path="*"
+          element={<Navigate to={isAuth ? "/quiz" : "/auth"} />}
+        />
+      </Routes>
+    </>
   );
 }
 

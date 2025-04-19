@@ -22,7 +22,6 @@ function Form({ setAuth }) {
     setAuth(true);
   };
 
-  const titleText = isRegistration ? "(Регистрация)" : "(Вход в систему)";
   const btnText = isRegistration ? "Зарегистрироваться" : "Войти";
 
   return (
@@ -33,7 +32,6 @@ function Form({ setAuth }) {
           setRegistration={setRegistration}
         />
       }
-      <div>{titleText}</div>
       <CommonForm
         initialFormData={initialFormData}
         onSubmit={handleSubmit}
